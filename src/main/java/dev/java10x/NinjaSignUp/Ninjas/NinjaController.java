@@ -1,4 +1,4 @@
-package dev.java10x.NinjaSignUp;
+package dev.java10x.NinjaSignUp.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
