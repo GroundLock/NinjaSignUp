@@ -22,6 +22,7 @@ public class MissionModel {
 
     private String name;
 
+    @Enumerated
     private Rank rank;
     // A mission can be applied to more than one ninja
     @OneToMany(mappedBy = "missions")
