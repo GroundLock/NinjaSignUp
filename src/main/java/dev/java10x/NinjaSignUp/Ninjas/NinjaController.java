@@ -3,7 +3,7 @@ package dev.java10x.NinjaSignUp.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("ninja")
+@RequestMapping("/ninja")
 public class NinjaController {
     @GetMapping("/welcome")
     public String welcome(){

@@ -3,7 +3,7 @@ package dev.java10x.NinjaSignUp.Missions.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("mission")
+@RequestMapping("/mission")
 public class MissionController {
 
     // C Post -- Send req to create missions
