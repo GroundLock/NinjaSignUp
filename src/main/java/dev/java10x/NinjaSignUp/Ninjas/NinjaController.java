@@ -24,7 +24,7 @@ public class NinjaController {
     }
 
     // Show ninja by ID (Read)
-    @GetMapping("/read")
+    @GetMapping("/readID")
     public String showNinjaByID(){
         return "Ninja shown by ID";
     }
