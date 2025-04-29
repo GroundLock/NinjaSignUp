@@ -1,5 +1,6 @@
 package dev.java10x.NinjaSignUp.Missions.Service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.NinjaSignUp.Ninjas.NinjaModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class MissionModel {
     private Rank rank;
     // A mission can be applied to more than one ninja
     @OneToMany(mappedBy = "missions")
+    @JsonIgnore
     private List<NinjaModel> ninja;
 
 }
