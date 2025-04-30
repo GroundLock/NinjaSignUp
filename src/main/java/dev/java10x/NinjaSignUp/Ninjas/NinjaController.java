@@ -33,10 +33,8 @@ public class NinjaController {
     }
 
     // Show ninja by ID (Read)
-    @GetMapping("/readID")
-    public String showNinjaByID(){
-        return "Ninja shown by ID";
-    }
+    @GetMapping("/readID/{id}")
+    public NinjaModel listNinjaByID(@PathVariable Long id){return ninjaService.listNinjaByID(id);}
 
     // Change data  (Update)
     @PutMapping("/updateID")

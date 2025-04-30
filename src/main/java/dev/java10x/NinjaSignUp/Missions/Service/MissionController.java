@@ -24,10 +24,8 @@ public class MissionController {
         return missionService.listMission();
     }
 
-    @GetMapping("/readID")
-    public String showID(){
-        return "showID";
-    }
+    @GetMapping("/readID/{id}")
+    public MissionModel listMissionByID(@PathVariable Long id){return missionService.listMissionByID(id);}
 
     // U Put -- Send req to update a mission
     @PutMapping("/updateID")
