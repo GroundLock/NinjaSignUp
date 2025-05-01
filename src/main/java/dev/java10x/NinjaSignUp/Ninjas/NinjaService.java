@@ -1,5 +1,6 @@
 package dev.java10x.NinjaSignUp.Ninjas;
 
+import dev.java10x.NinjaSignUp.Missions.Service.Rank;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +25,10 @@ public class NinjaService {
         Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
         return ninjaModel.orElse(null);
     }
+
+    public NinjaModel createNinja(NinjaModel ninjaModel){
+        return ninjaRepository.save(ninjaModel);
+    }
+
+
 }

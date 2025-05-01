@@ -22,9 +22,7 @@ public class NinjaController {
 
     // Add Ninja (Create)
     @PostMapping("/create")
-    public String createNinja(){
-        return "Ninja Created";
-    }
+    public NinjaModel createNinja(@RequestBody NinjaModel ninjaModel){return ninjaService.createNinja(ninjaModel);}
 
     // Show ninjas (Read)
     @GetMapping("/readall")
