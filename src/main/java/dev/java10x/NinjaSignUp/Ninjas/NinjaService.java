@@ -30,5 +30,10 @@ public class NinjaService {
         return ninjaRepository.save(ninjaModel);
     }
 
+    // Deletes - Need to be void
+    public void deleteNinjaId(Long id){
+        ninjaRepository.deleteById(id);
+    }
+
 
 }

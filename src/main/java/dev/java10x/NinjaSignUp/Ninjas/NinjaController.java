@@ -20,6 +20,7 @@ public class NinjaController {
 
     }
 
+
     // Add Ninja (Create)
     @PostMapping("/create")
     public NinjaModel createNinja(@RequestBody NinjaModel ninjaModel){return ninjaService.createNinja(ninjaModel);}
@@ -41,10 +42,8 @@ public class NinjaController {
     }
 
     // Delete Ninja (Delete)
-    @DeleteMapping("/deleteID")
-    public String deleteID(){
-        return "Ninja deleted";
-    }
+    @DeleteMapping("/deleteID/{id}")
+    public void deleteID(@PathVariable Long id){ninjaService.deleteNinjaId(id);}
 
     // All of this is called CRUD (Create, read, update, delete)
 

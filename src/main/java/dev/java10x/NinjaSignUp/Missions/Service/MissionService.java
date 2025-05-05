@@ -20,4 +20,12 @@ public class MissionService {
         Optional<MissionModel> missionModel = missionRepository.findById(id);
         return missionModel.orElse(null);
     }
+
+    public MissionModel createMission(MissionModel missionModel){
+        return missionRepository.save(missionModel);
+    }
+
+    public void deleteID(Long id){
+        missionRepository.deleteById(id);
+    }
 }

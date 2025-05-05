@@ -14,9 +14,7 @@ public class MissionController {
 
     // C Post -- Send req to create missions
     @PostMapping("/create")
-    public String createMission(){
-        return "create mission";
-    }
+    public MissionModel createMission(MissionModel missionModel){return missionService.createMission(missionModel);}
 
     // R Get -- Send req to show missions
     @GetMapping("/readall")
@@ -34,10 +32,7 @@ public class MissionController {
     }
 
     // D Delete -- Send req to delete a mission
-    @DeleteMapping("/deleteID")
-    public String deleteID(){
-        return "delete ID";
-    }
-
+    @DeleteMapping("/deleteID/{id}")
+    public void deleteID(@PathVariable Long id){missionService.deleteID(id);}
 
 }
