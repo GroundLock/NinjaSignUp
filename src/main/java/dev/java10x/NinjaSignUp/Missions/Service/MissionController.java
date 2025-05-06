@@ -26,10 +26,8 @@ public class MissionController {
     public MissionModel listMissionByID(@PathVariable Long id){return missionService.listMissionByID(id);}
 
     // U Put -- Send req to update a mission
-    @PutMapping("/updateID")
-    public String updateID(){
-        return "update ID";
-    }
+    @PutMapping("/updateID/{id}")
+    public MissionModel updateMission(@PathVariable Long id, @RequestBody MissionModel missionModel){return missionService.updateMission(missionModel, id);}
 
     // D Delete -- Send req to delete a mission
     @DeleteMapping("/deleteID/{id}")
