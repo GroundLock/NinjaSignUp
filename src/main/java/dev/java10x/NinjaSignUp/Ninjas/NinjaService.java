@@ -10,9 +10,11 @@ import java.util.Optional;
 public class NinjaService {
 
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     // List all ninjas
@@ -26,8 +28,11 @@ public class NinjaService {
         return ninjaModel.orElse(null);
     }
 
-    public NinjaModel createNinja(NinjaModel ninjaModel){
-        return ninjaRepository.save(ninjaModel);
+    // Create Ninja
+    public NinjaDTO createNinja(NinjaDTO ninjaDTO){
+     NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+     ninja = ninjaRepository.save(ninja);
+     return ninjaMapper.map(ninja);
     }
 
     // Deletes - Need to be void
