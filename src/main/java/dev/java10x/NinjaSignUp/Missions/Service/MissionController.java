@@ -15,7 +15,6 @@ public class MissionController {
     // C Post -- Send req to create missions
     @PostMapping("/create")
     public MissionModel createMission(MissionModel missionModel){return missionService.createMission(missionModel);}
-
     // R Get -- Send req to show missions
     @GetMapping("/readall")
     public List<MissionModel> listMissions(){
