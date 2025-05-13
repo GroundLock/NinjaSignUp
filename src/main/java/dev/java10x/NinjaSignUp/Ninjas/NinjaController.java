@@ -1,5 +1,7 @@
 package dev.java10x.NinjaSignUp.Ninjas;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +25,10 @@ public class NinjaController {
 
     // Add Ninja (Create)
     @PostMapping("/create")
-    public NinjaDTO createNinja(@RequestBody NinjaDTO ninja){
-        return ninjaService.createNinja(ninja);
+    public ResponseEntity<String> createNinja(@RequestBody NinjaDTO ninja){
+        NinjaDTO newNinja = ninjaService.createNinja(ninja);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Success: New ninja created on ID (" + newNinja.getId() + ")");
     }
 
     // Show ninjas (Read)
@@ -35,15 +39,32 @@ public class NinjaController {
 
     // Show ninja by ID (Read)
     @GetMapping("/readID/{id}")
-    public NinjaDTO listNinjaByID(@PathVariable Long id){return ninjaService.listNinjaByID(id);}
+    public ResponseEntity<String> listNinjaByID(@PathVariable Long id){
+        if(ninjaService.listNinjaByID(id)!=null){
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .body("Found ninja in id "+id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Not found");
+    }
 
     // Change data  (Update)
     @PutMapping("/updateID/{id}")
-    public NinjaDTO updateByID(@PathVariable Long id, @RequestBody NinjaDTO ninjaDTO){return ninjaService.updateNinja(ninjaDTO, id);}
+    public ResponseEntity<String> updateByID(@PathVariable Long id, @RequestBody NinjaDTO ninjaDTO){
+        ninjaService.updateNinja(ninjaDTO, id);
+        return ResponseEntity.ok("Ninja Update on ID "+id);
+    }
 
     // Delete Ninja (Delete)
     @DeleteMapping("/deleteID/{id}")
-    public void deleteID(@PathVariable Long id){ninjaService.deleteNinjaId(id);}
+    public ResponseEntity<String> deleteID(@PathVariable Long id){
+        if (ninjaService.listNinjaByID(id)!=null){
+            ninjaService.deleteNinjaId(id);
+            return ResponseEntity.ok("Success: Ninja deleted on ID " + id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Failed: Ninja not found on ID " + id);
+    }
 
     // All of this is called CRUD (Create, read, update, delete)
 
