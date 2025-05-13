@@ -14,15 +14,18 @@ public class MissionController {
 
     // C Post -- Send req to create missions
     @PostMapping("/create")
-    public MissionModel createMission(MissionModel missionModel){return missionService.createMission(missionModel);}
+    public MissionDTO createMission(@RequestBody MissionDTO missionDTO){
+        return missionService.createMission(missionDTO);
+    }
+    
     // R Get -- Send req to show missions
     @GetMapping("/readall")
-    public List<MissionModel> listMissions(){
+    public List<MissionDTO> listMissions(){
         return missionService.listMission();
     }
 
     @GetMapping("/readID/{id}")
-    public MissionModel listMissionByID(@PathVariable Long id){return missionService.listMissionByID(id);}
+    public MissionDTO listMissionByID(@PathVariable Long id){return missionService.listMissionByID(id);}
 
     // U Put -- Send req to update a mission
     @PutMapping("/updateID/{id}")
