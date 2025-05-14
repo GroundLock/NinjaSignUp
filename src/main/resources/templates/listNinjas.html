@@ -1,0 +1,35 @@
+<!
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<h1>Ninjas List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Img_url</th>
+            <th>Rank</th>
+            <th>Missions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each = "ninja: ${ninjas}">
+            <td th:text="${ninja.id}"></td>
+            <td th:text="${ninja.name}"></td>
+            <td th:text="${ninja.age}"></td>
+            <td th:text="${ninja.email}"></td>
+            <td><img th:src="${ninja.imgUrl}"></td>
+            <td th:text="${ninja.rank}"></td>
+            <td th:text="${ninja.missions}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
