@@ -6,15 +6,17 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 // Entity Transforms a class to an entity in DB
 @Entity
 @Table(name = "tb_sign_up")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@ToString(exclude = "missions")
 
 public class NinjaModel {
 
