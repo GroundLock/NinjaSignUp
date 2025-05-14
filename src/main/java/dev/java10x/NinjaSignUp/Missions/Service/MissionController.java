@@ -1,5 +1,7 @@
 package dev.java10x.NinjaSignUp.Missions.Service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,25 +16,51 @@ public class MissionController {
 
     // C Post -- Send req to create missions
     @PostMapping("/create")
-    public MissionDTO createMission(@RequestBody MissionDTO missionDTO){
-        return missionService.createMission(missionDTO);
+    public ResponseEntity<String> createMission(@RequestBody MissionDTO missionDTO){
+        MissionDTO newMission = missionService.createMission(missionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Mission created on id " + newMission.getId());
     }
 
     // R Get -- Send req to show missions
-    @GetMapping("/readall")
+    @GetMapping("/read/all")
     public List<MissionDTO> listMissions(){
         return missionService.listMission();
     }
 
-    @GetMapping("/readID/{id}")
-    public MissionDTO listMissionByID(@PathVariable Long id){return missionService.listMissionByID(id);}
+    @GetMapping("/read/ID/{id}")
+    public ResponseEntity<?> listMissionByID(@PathVariable Long id){
+
+        MissionDTO mission = missionService.listMissionByID(id);
+        if (mission != null){
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .body(mission);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Mission not found on id " + id);
+
+    }
 
     // U Put -- Send req to update a mission
     @PutMapping("/updateID/{id}")
-    public MissionModel updateMission(@PathVariable Long id, @RequestBody MissionModel missionModel){return missionService.updateMission(missionModel, id);}
+    public ResponseEntity<?> updateMission(@PathVariable Long id, @RequestBody MissionDTO missionDTO){
+        if (missionService.listMissionByID(id)!=null){
+            MissionDTO mission = missionService.updateMission(missionDTO, id);
+            return ResponseEntity.ok(mission);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Mission not found id " + id);
+    }
 
     // D Delete -- Send req to delete a mission
     @DeleteMapping("/deleteID/{id}")
-    public void deleteID(@PathVariable Long id){missionService.deleteID(id);}
+    public ResponseEntity<String> deleteID(@PathVariable Long id){
+        if (missionService.listMissionByID(id) != null){
+            missionService.deleteID(id);
+            return ResponseEntity.ok("Misison deleted in id " + id);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("No mission found in the id " + id);
+    }
 
 }

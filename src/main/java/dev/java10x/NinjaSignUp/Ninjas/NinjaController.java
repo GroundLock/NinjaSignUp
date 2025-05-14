@@ -32,17 +32,18 @@ public class NinjaController {
     }
 
     // Show ninjas (Read)
-    @GetMapping("/readall")
+    @GetMapping("/read/all")
     public List<NinjaDTO> listAllNinja(){
         return ninjaService.listNinja();
     }
 
     // Show ninja by ID (Read)
-    @GetMapping("/readID/{id}")
-    public ResponseEntity<String> listNinjaByID(@PathVariable Long id){
-        if(ninjaService.listNinjaByID(id)!=null){
+    @GetMapping("/read/ID/{id}")
+    public ResponseEntity<?> listNinjaByID(@PathVariable Long id){
+        NinjaDTO ninja = ninjaService.listNinjaByID(id);
+        if(ninja != null){
             return ResponseEntity.status(HttpStatus.FOUND)
-                    .body("Found ninja in id "+id);
+                    .body(ninja);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("Not found");
@@ -50,9 +51,14 @@ public class NinjaController {
 
     // Change data  (Update)
     @PutMapping("/updateID/{id}")
-    public ResponseEntity<String> updateByID(@PathVariable Long id, @RequestBody NinjaDTO ninjaDTO){
-        ninjaService.updateNinja(ninjaDTO, id);
-        return ResponseEntity.ok("Ninja Update on ID "+id);
+    public ResponseEntity<?> updateByID(@PathVariable Long id, @RequestBody NinjaDTO ninjaDTO){
+        if(ninjaService.listNinjaByID(id)!=null){
+            NinjaDTO ninja = ninjaService.updateNinja(ninjaDTO, id);
+            return ResponseEntity.ok(ninja);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Ninja not found on id "+id);
     }
 
     // Delete Ninja (Delete)

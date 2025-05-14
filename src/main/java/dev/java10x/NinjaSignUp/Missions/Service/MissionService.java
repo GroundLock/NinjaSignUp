@@ -44,9 +44,13 @@ public class MissionService {
     }
 
     // Update mission
-    public MissionModel updateMission(MissionModel missionModel, Long id){
-        if (missionRepository.existsById(id)){
-            return missionRepository.save(missionModel);
+    public MissionDTO updateMission(MissionDTO missionDTO, Long id){
+        Optional<MissionModel> missionExist = missionRepository.findById(id);
+        if (missionExist.isPresent()){
+            MissionModel missionUpdated = missionMapper.map(missionDTO);
+            missionUpdated.setId(id);
+            MissionModel missionSaved = missionRepository.save(missionUpdated);
+            return missionMapper.map(missionSaved);
         }
         return null;
     }
