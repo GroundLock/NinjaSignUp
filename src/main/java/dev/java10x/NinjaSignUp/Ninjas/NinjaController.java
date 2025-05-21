@@ -62,7 +62,7 @@ public class NinjaController {
     }
 
     // Delete Ninja (Delete)
-    @DeleteMapping("/deleteID/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteID(@PathVariable Long id){
         if (ninjaService.listNinjaByID(id)!=null){
             ninjaService.deleteNinjaId(id);

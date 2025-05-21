@@ -1,0 +1,127 @@
+<!
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document</title>
+  <style>
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    margin: 0;
+    padding: 2rem;
+    color: #e0e0e0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #cccccc;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #27ae60;
+}
+
+button[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #219150;
+}
+
+a {
+    display: inline-block;
+    margin-top: 1.2rem;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #5dade2;
+}
+
+.message {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+  </style>
+</head>
+<body>
+<h1>Add Ninja</h1>
+<div class="form-container">
+    <div th:if="${message}" class="message" th:text="${message}"></div>
+    <form th:action="@{/UI/ninja/create}" th:object="${ninja}" method="post">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+
+        <label for="imgUrl">Image URL:</label>
+        <input type="text" id="imgUrl" th:field="*{imgUrl}" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="*{age}" required />
+
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" th:field="*{rank}" />
+
+        <button type="submit">Create Ninja</button>
+    </form>
+  <a th:href="@{/UI/ninja/read/all}">Back to the list</a>
+</div>
+</body>
+</html>
